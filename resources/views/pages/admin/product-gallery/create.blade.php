@@ -1,15 +1,15 @@
 @extends('layouts.admin')
 
 @section('title')
-    Product
+    Product Gallery
 @endsection
 
 @section('content')
     <div class="section-content section-dashboard-home" data-aos="fade-up">
         <div class="container-fluid">
             <div class="dashboard-heading">
-                <h2 class="dashboard-title">Product</h2>
-                <p class="dashboard-subtitle">Create New Product</p>
+                <h2 class="dashboard-title">Product Gallery</h2>
+                <p class="dashboard-subtitle">Create New Product Gallery</p>
             </div>
             <div class="dashboard-content">
                 <div class="row">
@@ -25,46 +25,24 @@
                         @endif
                         <div class="card">
                             <div class="card-body">
-                                <form action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
+                                <form action="{{ route('product-gallery.store') }}" method="POST"
+                                    enctype="multipart/form-data">
                                     @csrf
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label>Product Name</label>
-                                                <input type="text" name="name" class="form-control" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label>User</label>
-                                                <select name="users_id" class="form-control">
-                                                    @foreach ($users as $user)
-                                                        <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                                <label>Product</label>
+                                                <select name="products_id" class="form-control">
+                                                    @foreach ($products as $product)
+                                                        <option value="{{ $product->id }}">{{ $product->name }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label>Product Category</label>
-                                                <select name="categories_id" class="form-control">
-                                                    @foreach ($categories as $category)
-                                                        <option value="{{ $category->id }}">{{ $category->name }}
-                                                        </option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label>Product Price</label>
-                                                <input type="number" name="price" class="form-control" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label>Product Description</label>
-                                                <textarea name="description" id="editor"></textarea>
+                                                <label>Photo Product</label>
+                                                <input type="file" name="photos" class="form-control" required>
                                             </div>
                                         </div>
                                     </div>

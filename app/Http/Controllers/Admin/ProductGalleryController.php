@@ -11,7 +11,6 @@ use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
-use App\Http\Requests\Admin\ProductRequest;
 use App\Http\Requests\Admin\ProductGalleryRequest;
 
 
@@ -70,12 +69,10 @@ class ProductGalleryController extends Controller
      */
     public function create()
     {
-        $users = User::all();
-        $categories = Category::all();
+        $products = Product::all();
         
         return view('pages.admin.product-gallery.create',[
-            'users' => $users,
-            'categories' => $categories
+            'products' => $products
         ]);
     }
 
@@ -85,15 +82,15 @@ class ProductGalleryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ProductRequest $request)
+    public function store(ProductGalleryRequest $request)
     {
         $data = $request->all();
 
-        $data['slug'] = Str::slug($request->name);
+       $data['photos'] = $request->file('photos')->store('assets/product', 'public');
 
-        Product::create($data);
+        ProductGallery::create($data);
 
-        return redirect()->route('product.index');
+        return redirect()->route('product-gallery.index');
     }
 
     /**
@@ -115,15 +112,7 @@ class ProductGalleryController extends Controller
      */
     public function edit($id)
     {
-        $item = Product::with(['category','user'])->findOrFail($id);
-        $users = User::all();
-        $categories = Category::all();
-        
-        return view('pages.admin.product-gallery.edit',[
-            'item' => $item,
-            'users' => $users,
-            'categories' => $categories
-        ]);
+       //
     }
 
     /**
@@ -133,17 +122,9 @@ class ProductGalleryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ProductRequest $request, $id)
+    public function update(ProductGalleryRequest $request, $id)
     {
-        $data = $request->all();
-
-        $item = Product::findOrFail($id);
-
-        $data['slug'] = Str::slug($request->name);
-
-        $item->update($data);
-
-        return redirect()->route('product.index');
+        //
     }
 
     /**
@@ -154,10 +135,10 @@ class ProductGalleryController extends Controller
      */
     public function destroy($id)
     {
-        $item = Product::findorFail($id);
+        $item = ProductGallery::findorFail($id);
         $item->delete();
 
-        return redirect()->route('product.index');
+        return redirect()->route('product-gallery.index');
 
     }
 }
