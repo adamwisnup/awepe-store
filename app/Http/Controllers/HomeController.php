@@ -15,11 +15,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $categoories = Category::take(6)->get();
+        $categories = Category::take(6)->get();
         $products = Product::with(['galleries'])->take(8)->get();
 
         return view('pages.home', [
-            'categories' => $categoories,
+            'categories' => $categories,
             'products' => $products
         ]);
     }

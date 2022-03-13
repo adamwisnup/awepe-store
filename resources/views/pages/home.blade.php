@@ -76,7 +76,7 @@
                                 <div class="products-thumbnail">
                                     <div class="products-image"
                                         style="
-                                                    @if ($product->galleries) background-image: url('{{ Storage::url($product->galleries->first()->photos) }}')
+                                                    @if ($product->galleries->count()) background-image: url('{{ Storage::url($product->galleries->first()->photos) }}')
                                             @else
                                                 background-color: #eee @endif">
                                     </div>
