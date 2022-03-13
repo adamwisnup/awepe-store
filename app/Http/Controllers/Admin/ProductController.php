@@ -40,7 +40,7 @@ class ProductController extends Controller
                          </button>
                          <div class="dropdown-menu">
                             <a class="dropdown-item" href="' . route('product.edit', $item->id) . '">
-                                Sunting
+                                Edit
                             </a>
                             <form action="' . route('product.destroy', $item->id) . '" method="POST">
                                 '. method_field('delete') . csrf_field() .'
