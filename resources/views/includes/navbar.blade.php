@@ -41,11 +41,16 @@
                                <a class="dropdown-item" href="{{ route('dashboard-settings-account') }}">Settings</a>
                                <div class="dropdown-divider"></div>
                                <a class="dropdown-item" href="{{ route('logout') }}"
-                                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                   Logout
+                               </a>
+                               <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                   @csrf
+                               </form>
                            </div>
                        </li>
                        <li class="nav-item">
-                           <a class="nav-link d-inline-block mt-2" href="#">
+                           <a class="nav-link d-inline-block mt-2" href="{{ route('cart') }}">
                                <img src="/images/icon-cart-empty.svg" alt="" />
                            </a>
                        </li>
@@ -57,7 +62,7 @@
                            <a class="nav-link" href="#"> Hi, {{ Auth::user()->name }} </a>
                        </li>
                        <li class="nav-item">
-                           <a class="nav-link d-inline-block" href="#"> Cart </a>
+                           <a class="nav-link d-inline-block" href="{{ route('cart') }}"> Cart </a>
                        </li>
                    </ul>
                @endauth
